@@ -18,7 +18,7 @@ export default function Register(props) {
 
   const { isFieldInError, getErrorsInField, isFormValid } = useValidation({
     fieldsRules: {
-      email: { email: true},
+      email: { email: true, required: true},
       username: {minlength:8, maxlength:13, hasSpecialCharacter: false,required: true},
       password:{required: true, hasSpecialCharacter: false,  minlength: 8},
       confirmPassword:{required: true, hasSpecialCharacter:false,  minlength: 8}

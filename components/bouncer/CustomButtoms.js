@@ -1,18 +1,48 @@
 import { Text, StyleSheet, View, TouchableOpacity, Alert} from 'react-native'
 import React, { Component } from 'react'
-import { getRegister } from './controllers/controllers'
+import { getLogin, getRegister } from './controllers/controllers'
+import {useSelector, useDispatch} from 'react-redux'
+import { getToken } from '../../features/auth'
+
+const register=(data,navigation)=>{
+  getRegister(data)
+          .then(response=> Alert.alert(
+          'Usuario registrado',
+          response.msg,
+          [{
+            text:'OK',
+            onPress: ()=>navigation.navigate(props.dir, {name:props.dir})
+          }]))
+}
+
+const login=(data,handler)=>{
+  getLogin(data).then(
+    response=>{
+      if(response.status===200){
+        handler.dispatch(getToken(response.token))
+        handler.navigation.navigate(handler.dir,{name:handler.dir})
+      }
+      else{
+        Alert.alert(
+          'Fallo inicio de sesion',
+          response.msg,
+          [{
+            text:'OK'
+          }])
+      }
+    }
+  )
+}
+
+
 
 export function SubmitNavigationButtom(props){
 
   return(
     <View>
-      <TouchableOpacity disabled={props.valid} style={styles.button} onPress={
-        ()=>{
-          console.log(props.send)
-          getRegister(props.send).then(response=> console.log(response)).then(props.navigation.navigate(props.dir, {name:props.dir})) 
-          }}>
-            <Text style={styles.text}>{props.text}</Text>
-         </TouchableOpacity>
+      <TouchableOpacity disabled={props.valid} style={styles.button} onPress={()=>register(props.send, props.navigation)}>
+          <Text style={styles.text}>{props.text}</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -25,6 +55,21 @@ export function NormalNavigationButtom(props){
          </TouchableOpacity>
     </View>
   )
+}
+
+export function LoginButtom(props){
+  const dispatch=useDispatch()
+  const handler={
+    dispatch,
+    navigation:props.navigation,
+    dir:props.dir
+  }
+  return(
+  <View>
+    <TouchableOpacity disabled={props.valid} style={styles.button} onPress={()=>login(props.send, handler)}>
+          <Text style={styles.text}>{props.text}</Text>
+       </TouchableOpacity>
+  </View>)
 }
 
 
