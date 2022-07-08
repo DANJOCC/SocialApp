@@ -2,8 +2,8 @@ import { Text, StyleSheet, View, TouchableOpacity, Alert} from 'react-native'
 import React, { Component } from 'react'
 import { getLogin, getRegister } from './controllers/controllers'
 import {useSelector, useDispatch} from 'react-redux'
-import { getToken } from '../../features/auth'
-
+import { getAuth } from '../../features/auth'
+import {getUserTweets} from "../../features/tweetsSlice"
 const register=(data,navigation)=>{
   getRegister(data)
           .then(response=> Alert.alert(
@@ -19,7 +19,13 @@ const login=(data,handler)=>{
   getLogin(data).then(
     response=>{
       if(response.status===200){
-        handler.dispatch(getToken(response.token))
+        handler.dispatch(getAuth({
+          token:response.token,
+          username:response.username
+        }))
+        handler.dispatch(getUserTweets({
+          tweets:response.tweets
+        }))
         handler.navigation.navigate(handler.dir,{name:handler.dir})
       }
       else{

@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Feed from './Feed';
-import Profile from './Profile';
-import Search from './Search';
+import Feed from './pages/Feed';
+import Profile from './pages/Profile';
+import Search from './pages/Search';
 
 const Tab=createBottomTabNavigator();
 
