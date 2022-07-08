@@ -1,6 +1,6 @@
 import { StyleSheet, View, TextInput, Text } from 'react-native'
 import React from 'react'
-import {LoginButtom, NormalNavigationButtom} from '../bouncer/CustomButtoms'
+import {LoginButtom} from '../bouncer/CustomButtoms'
 import { useValidation } from 'react-simple-form-validator';
 import { useState } from 'react'
 

@@ -1,11 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function tweet() {
+export default function Tweet({item}) {
   return (
     <View>
-      <Text></Text>
-      
+      <Text>
+        {item}
+      </Text>
     </View>
   )
 }

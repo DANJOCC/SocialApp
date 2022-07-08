@@ -12,8 +12,9 @@ export const getTweets= async (username, token)=>{
     return responseBody
 }
 
-export const newTweet=async(username, tweet)=>{
-    const response = await fetch(url+"/tweet",{
+export const newTweet=async(username, tweet, token)=>{
+    const response = await fetch(url+"/newTweet",{
+        method:'PUT',
         headers:{
             "Content-Type": "application/json",
             'Authorization': 'Bearer ' + token
