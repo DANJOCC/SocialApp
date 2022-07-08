@@ -55,7 +55,7 @@ export default function CrearTweet(){
 const styles = StyleSheet.create({
     button:{
         backgroundColor: 'purple',
-        paddingVertical: 15,
+        paddingVertical: 4,
         borderRadius: 40,
         margin: 10,
       },

@@ -25,3 +25,17 @@ export const newTweet=async(username, tweet, token)=>{
     responseBody.status= response.status
     return responseBody
 }
+
+export const deleteTweets=async(username, position, token)=>{
+    const response = await fetch(url+"/deleteTweet",{
+        method:'DELETE',
+        headers:{
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + token
+          },
+        body:JSON.stringify({username,position})
+    })
+    const responseBody=await response.json();
+    responseBody.status= response.status
+    return responseBody
+}
